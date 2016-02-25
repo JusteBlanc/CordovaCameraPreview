@@ -15,6 +15,7 @@ import android.hardware.Camera;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.DisplayMetrics;
+import android.util.Base64;
 import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -399,7 +400,7 @@ public class CameraActivity extends Fragment {
     private void sendBase64(final byte[] bytes ){
          new Thread() {
 		    public void run() {
-                eventListener.onPictureTaken(new String(bytes), "");
+                eventListener.onPictureTaken(Base64.encodeToString(bytes, Base64.DEFAULT), "");
             }
          }.start();
     }
