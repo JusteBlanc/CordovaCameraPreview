@@ -30,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import org.apache.cordova.LOG;
+import org.apache.commons.codec.binary.Base64;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
