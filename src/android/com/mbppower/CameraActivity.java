@@ -396,7 +396,7 @@ public class CameraActivity extends Fragment {
 			canTakePicture = true;
 		}
 	}
-    private void sendBase64(byte[] bytes ){
+    private void sendBase64(final byte[] bytes ){
          new Thread() {
 		    public void run() {
                 eventListener.onPictureTaken(new String(bytes, "Base64"), "");
