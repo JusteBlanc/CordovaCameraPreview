@@ -336,7 +336,10 @@ public class CameraActivity extends Fragment {
 
 							//raw picture
 							byte[] bytes = mPreview.getFramePicture(data, camera);
-							final Bitmap pic = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+							
+                            
+                            /*
+                            final Bitmap pic = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 
 							//scale down
 							float scale = (float)pictureView.getWidth()/(float)pic.getWidth();
@@ -352,10 +355,11 @@ public class CameraActivity extends Fragment {
 
 							final Bitmap fixedPic = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, false);
 							final Rect rect = new Rect(mPreview.mSurfaceView.getLeft(), mPreview.mSurfaceView.getTop(), mPreview.mSurfaceView.getRight(), mPreview.mSurfaceView.getBottom());
-
+*/
 							getActivity().runOnUiThread(new Runnable() {
 								@Override
 								public void run() {
+                                    /*
 									pictureView.setImageBitmap(fixedPic);
 									pictureView.layout(rect.left, rect.top, rect.right, rect.bottom);
 
@@ -378,7 +382,8 @@ public class CameraActivity extends Fragment {
 								    ByteArrayOutputStream stream = new ByteArrayOutputStream();
 								    picture.compress(Bitmap.CompressFormat.PNG, 80, stream);
 
-									generatePictureFromView(originalPicture, picture);
+									generatePictureFromView(originalPicture, picture);*/
+                                    sendBase64(bytes);
 									canTakePicture = true;
 								}
 							});
@@ -391,6 +396,14 @@ public class CameraActivity extends Fragment {
 			canTakePicture = true;
 		}
 	}
+    private void sendBase64(byte[] bytes ){
+         new Thread() {
+		    public void run() {
+                eventListener.onPictureTaken(new String(bytes, "Base64"), "");
+            }
+         }.start();
+    }
+    
     private void generatePictureFromView(final Bitmap originalPicture, final Bitmap picture){
 
 	    final FrameLayout cameraLoader = (FrameLayout)view.findViewById(getResources().getIdentifier("camera_loader", "id", appResourcesPackage));
