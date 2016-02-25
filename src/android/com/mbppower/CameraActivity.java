@@ -30,7 +30,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import org.apache.cordova.LOG;
-import org.apache.commons.codec.binary.Base64;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -400,7 +399,7 @@ public class CameraActivity extends Fragment {
     private void sendBase64(final byte[] bytes ){
          new Thread() {
 		    public void run() {
-                eventListener.onPictureTaken(new String(Base64.encode(bytes)), "");
+                eventListener.onPictureTaken(new String(bytes), "");
             }
          }.start();
     }
