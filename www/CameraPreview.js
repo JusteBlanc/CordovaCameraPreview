@@ -11,7 +11,7 @@ CameraPreview.setOnPictureTakenHandler = function(onPictureTaken) {
 };
 
 CameraPreview.setOnImageRefreshedHandler = function(onImageRefreshed) {
-    exec(onImageRefreshed, onImageRefreshed, PLUGIN_NAME, "setOnImageRefreshedHandler", []);
+  exec(onImageRefreshed, onImageRefreshed, PLUGIN_NAME, "setOnImageRefreshedHandler", []);
 }
 
 //@param rect {x: 0, y: 0, width: 100, height:100}
