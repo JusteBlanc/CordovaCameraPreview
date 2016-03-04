@@ -10,6 +10,10 @@ CameraPreview.setOnPictureTakenHandler = function(onPictureTaken) {
   exec(onPictureTaken, onPictureTaken, PLUGIN_NAME, "setOnPictureTakenHandler", []);
 };
 
+CameraPreview.setOnImageRefreshedHandler = function(onImageRefreshed) {
+    exec(onImageRefreshed, onImageRefreshed, PLUGIN_NAME, "setOnImageRefreshedHandler", []);
+}
+
 //@param rect {x: 0, y: 0, width: 100, height:100}
 //@param defaultCamera "front" | "back"
 CameraPreview.startCamera = function(rect, defaultCamera, tapEnabled, dragEnabled, toBack, alpha) {
