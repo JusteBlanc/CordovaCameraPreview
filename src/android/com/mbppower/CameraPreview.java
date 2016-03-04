@@ -92,9 +92,11 @@ public class CameraPreview extends CordovaPlugin implements CameraActivity.Camer
     }
 
 	private boolean startCamera(final JSONArray args, CallbackContext callbackContext) {
+        cordova.requestPermissions(this, 0, { Manifest.permission.CAMERA , Manifest.permission.WRITE_EXTERNAL_STORAGE});
         if(fragment != null){
 	        return false;
         }
+        
 		fragment = new CameraActivity();
 		fragment.setEventListener(this);
 
