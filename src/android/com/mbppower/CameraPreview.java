@@ -19,6 +19,7 @@ public class CameraPreview extends CordovaPlugin implements CameraActivity.Camer
 
 	private final String TAG = "CameraPreview";
 	private final String setOnPictureTakenHandlerAction = "setOnPictureTakenHandler";
+    private final String setOnImageRefreshedHandlerAction = "setOnImageRefreshedHandler";
 	private final String setColorEffectAction = "setColorEffect";
 	private final String startCameraAction = "startCamera";
 	private final String stopCameraAction = "stopCamera";
@@ -26,21 +27,39 @@ public class CameraPreview extends CordovaPlugin implements CameraActivity.Camer
 	private final String takePictureAction = "takePicture";
 	private final String showCameraAction = "showCamera";
 	private final String hideCameraAction = "hideCamera";
+    private final String getImgAction = "getImg";
+
 
 	private CameraActivity fragment;
 	private CallbackContext takePictureCallbackContext;
+    private CallbackContext imageRefreshCallbackContext;
 	private int containerViewId = 1;
 	public CameraPreview(){
 		super();
 		Log.d(TAG, "Constructing");
 	}
-
+    /*
+    @Override
+    public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults) throws JSONException
+    {
+        for(int r:grantResults){
+            if(r == PackageManager.PERMISSION_DENIED){
+                this.callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, "Erreur permission"));
+                return;
+            }
+        }       
+    }*/
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+        //Check permission android 6.0
+        cordova.RequestPermission(this, 0, Manifest.permission.CAMERA);
 
     	if (setOnPictureTakenHandlerAction.equals(action)){
     		return setOnPictureTakenHandler(args, callbackContext);
     	}
+        else if (setOnImageRefreshedHandlerAction.equals(action)){
+    		return setOnImageRefreshedHandler(args, callbackContext);
+    	}        
         else if (startCameraAction.equals(action)){
     		return startCamera(args, callbackContext);
     	}
@@ -62,6 +81,9 @@ public class CameraPreview extends CordovaPlugin implements CameraActivity.Camer
 	    else if (switchCameraAction.equals(action)){
 		    return switchCamera(args, callbackContext);
 	    }
+        /*else if (getImgAction.equals(action)){
+            return getImg(args, callbackContext);
+        }*/
 
     	return false;
     }
@@ -247,4 +269,10 @@ public class CameraPreview extends CordovaPlugin implements CameraActivity.Camer
 	    takePictureCallbackContext = callbackContext;
     	return true;
 	}
+    
+    private boolean setOnImageRefreshedHandler(JSONArray args, CallbackContext callbackContext) {
+        Log.d(TAG, "setOnImageRefreshedHandler");
+        imageRefreshCallbackContext = callbackContext;
+        return true;
+    }
 }
