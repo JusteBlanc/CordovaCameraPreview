@@ -398,11 +398,7 @@ public class CameraActivity extends Fragment {
 		}
 	}
     private void sendBase64(final byte[] bytes ){
-         new Thread() {
-		    public void run() {
-                eventListener.onPictureTaken(Base64.encodeToString(bytes, Base64.DEFAULT), "");
-            }
-         }.start();
+        eventListener.onPictureTaken(Base64.encodeToString(bytes, Base64.DEFAULT), "");
     }
     
     private void generatePictureFromView(final Bitmap originalPicture, final Bitmap picture){
