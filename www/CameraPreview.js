@@ -48,4 +48,8 @@ CameraPreview.disable = function(disable) {
   exec(null, null, PLUGIN_NAME, "disable", [disable]);
 };
 
+CameraPreview.getImg = function() {
+  exec(null, null, PLUGIN_NAME, "getImg", []);
+};
+
 module.exports = CameraPreview;
