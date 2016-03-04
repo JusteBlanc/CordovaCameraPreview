@@ -54,8 +54,7 @@ public class CameraPreview extends CordovaPlugin implements CameraActivity.Camer
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         //Check permission android 6.0
-        String[] permissions = { Manifest.permission.CAMERA , Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        cordova.requestPermissions(this, 0, permissions);
+        //cordova.requestPermissions(this, 0, { Manifest.permission.CAMERA , Manifest.permission.WRITE_EXTERNAL_STORAGE});
         
 
     	if (setOnPictureTakenHandlerAction.equals(action)){
